@@ -19,4 +19,4 @@ AUTO_INCREMENT=2;
 INSERT INTO tbl_produto
 (descricao, valor, quantidade)
 VALUES 
-('Arroz', 2.50, 4);
+('Feijao', 4.50, 4);
