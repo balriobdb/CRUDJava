@@ -19,19 +19,19 @@ import javax.swing.JOptionPane;
  * @author mauricio.freitas1
  */
 public class ProdutoDAO {
-
+    
     public List<Produto> read() {
         Connection con = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Produto> produtos = new ArrayList<>();
-
+        
         try {
             stmt = con.prepareStatement("SELECT * FROM tbl_produto");
             rs = stmt.executeQuery();
-
+            
             while (rs.next()) {
-
+                
                 Produto p = new Produto();
                 p.setId(rs.getInt("id"));
                 p.setDescricao(rs.getString("descricao"));
@@ -48,5 +48,24 @@ public class ProdutoDAO {
         
         return produtos;
     }
-
+    
+    public void create(Produto p) {
+        Connection con = Conexao.getConnection();
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = con.prepareStatement("INSERT INTO tbl_produto(descricao, valor, quantidade) VALUES (?,?,?)");
+            stmt.setString(1, p.getDescricao());
+            stmt.setDouble(2, p.getValor());
+            stmt.setInt(3, p.getQuantidade());
+            
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Falha ao cadastrar: " + e);     
+        } finally {
+            Conexao.closeConnection(con, stmt);
+        }
+    }   
 }

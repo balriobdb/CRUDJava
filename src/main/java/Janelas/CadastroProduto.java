@@ -5,6 +5,7 @@
 package Janelas;
 
 import BD.Conexao;
+import DAO.ProdutoDAO;
 import Model.ProdutoTableModel;
 import Objetos.Produto;
 
@@ -13,7 +14,7 @@ import Objetos.Produto;
  * @author mauricio.freitas1
  */
 public class CadastroProduto extends javax.swing.JFrame {
-    
+
     ProdutoTableModel modelo = new ProdutoTableModel();
 
     /**
@@ -24,7 +25,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         jTProdutos.setModel(modelo);
         modelo.recarregaTabela();
-        
+
     }
 
     /**
@@ -198,10 +199,14 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
         Produto p = new Produto();
+        ProdutoDAO dao = new ProdutoDAO();
+
         p.setDescricao(jTDescricao.getText());
         p.setQuantidade(Integer.parseInt(jTQuantidade.getText()));
         p.setValor(Double.valueOf(jTValor.getText().replace(",", ".")));
-        modelo.addLinha(p);
+
+        dao.create(p);
+        modelo.recarregaTabela();
         limpaCampos();
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
@@ -216,10 +221,10 @@ public class CadastroProduto extends javax.swing.JFrame {
             Produto p = modelo.pegaDadosLinha(jTProdutos.getSelectedRow());
             jTDescricao.setText(p.getDescricao());
             jTQuantidade.setText(String.valueOf(p.getQuantidade()));
-            jTValor.setText(String.valueOf(p.getValor()));  
+            jTValor.setText(String.valueOf(p.getValor()));
         }
     }//GEN-LAST:event_jTProdutosMouseClicked
-    
+
     private void limpaCampos() {
         jTDescricao.setText("");
         jTQuantidade.setText("");
