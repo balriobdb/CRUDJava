@@ -20,3 +20,12 @@ INSERT INTO tbl_produto
 (descricao, valor, quantidade)
 VALUES 
 ('Feijao', 4.50, 4);
+
+CREATE TABLE tbl_usuarios (
+id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+nome VARCHAR(80) NOT NULL,
+login VARCHAR(50) NOT NULL,
+senha VARCHAR(255) NOT NULL,
+tipo VARCHAR(10) NOT NULL
+);
+
