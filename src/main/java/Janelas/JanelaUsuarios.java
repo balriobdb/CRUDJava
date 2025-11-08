@@ -16,8 +16,7 @@ import javax.swing.JOptionPane;
 public class JanelaUsuarios extends javax.swing.JFrame {
     
     UsuarioTableModel modelo = new UsuarioTableModel();
-    
-
+   
     /**
      * Creates new form JanelaUsuarios
      */
@@ -28,9 +27,7 @@ public class JanelaUsuarios extends javax.swing.JFrame {
         modelo.recarregaTabela();
         jCTipo.removeAllItems();
         jCTipo.addItem("Usuário");
-        jCTipo.addItem("Admin");
-        
-        
+        jCTipo.addItem("Admin");        
     }
 
     /**
@@ -233,12 +230,10 @@ public class JanelaUsuarios extends javax.swing.JFrame {
             u.setSenhaHash(jPSenha.getPassword().toString());
             u.setTipo(jCTipo.getSelectedItem().toString());
             dao.create(u);
-            modelo.recarregaTabela();
-            
+            modelo.recarregaTabela();       
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "Erro: verifique os dados digitados.");
-        }
-        
+        }    
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     /**
